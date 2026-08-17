@@ -2,8 +2,6 @@ import logging
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
-from tools import cached_get
+from tools import cached_get, resolve_company
 
-data = cached_get("https://www.sec.gov/files/company_tickers.json")
-
-print(len(data))
+print(resolve_company("Meta"))

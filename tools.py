@@ -5,6 +5,7 @@ import time
 from pathlib import Path
 from typing import Any
 import httpx
+from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
 
@@ -69,9 +70,45 @@ def cached_get(url: str) -> Any:
     logger.info("cached response: %s", url)
     return data
 
+# ==============================================================================================
+TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 
-# # 2. Company resolution
-# resolve_company()
+@dataclass(frozen=True)
+class Company:
+    name: str
+    ticker: str
+    cik: str 
+
+def _to_company(entry: dict) -> Company:
+    return Company(
+        name=entry["title"],
+        ticker=entry["ticker"],
+        cik=str(entry["cik_str"]).zfill(10),
+    )
+
+def resolve_company(query: str) -> Company:
+    """Resolve a company name or ticker to a Company object."""
+    entries = list(cached_get(TICKERS_URL).values())
+    q = query.strip()
+
+    # extract ticker
+    for e in entries:
+        if e["ticker"].upper() == q.upper():
+            return _to_company(e)
+
+    # extract normalized name
+    for e in entries:
+        if e["title"].casefold() == q.casefold():
+            return _to_company(e)
+
+    # unique substrings
+    matches = [e for e in entries if q.casefold() in e["title"].casefold()]
+    if len(matches) == 1:
+        return _to_company(matches[0])
+    if not matches:
+        raise ValueError(f"No company found matching {query!r}")
+    candidates = ", ".join(f"{e['title']} ({e['ticker']})" for e in matches[:10])
+    raise ValueError(f"{query!r} is ambiguous; did you mean: {candidates}")
 
 # # 3. Financial extraction
 # pick_latest_quarterly()
