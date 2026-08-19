@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain_anthropic import ChatAnthropic
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langgraph.checkpoint.memory import InMemorySaver
 import sys
 import os
 import time
@@ -43,12 +42,12 @@ SERVERS = {
 }
 
 ALLOWED_TOOLS = [
-    "lookup", "cik",            # company resolution
-    "financial", "income",      # statements / financial facts
-    "filing",                   # latest 10-Q/10-K discovery
-    "search", "extract",        # tavily research
-    "read_pdf",                 # citra read pdf for the fall back
-    "yfinance_get_top",         # For finding top companies in a specific sector
+    "lookup", "cik",            
+    "financial", "income",      
+    "filing",                   
+    "search", "extract",        
+    "pdf",                      
+    "yfinance_get_top",         
 ]
 
 SYSTEM_PROMPT = """You are a financial analyst agent. Reliability contract:
@@ -69,7 +68,21 @@ SYSTEM_PROMPT = """You are a financial analyst agent. Reliability contract:
 6. Multi-company questions: gather per-company data, and if some companies
    fail, report successes and explicitly list failures. Partial answers
    with disclosed gaps beat silent omissions.
-7. If a question needs no tools or is out of scope, say so plainly."""
+7. If a question needs no tools or is out of scope, say so plainly.
+8. SHARED DOCUMENTS — when the user gives a local file path or a URL to a
+   document and asks about it, that document is the source for your answer:
+   - If it is an SEC filing (10-K/10-Q/8-K) of a public company, try the SEC
+     EDGAR tools by ticker/CIK first; they parse the underlying filing
+     directly and already carry a verifiable filing reference.
+   - Otherwise (or if EDGAR can't find it), call search_pdf/read_pdf with
+     the path or URL as a source (`sources: [{"path": ...}]` or
+     `[{"url": ...}]`).
+   - Cite the document for every fact you draw from it: name the file or
+     URL and the page number(s) the tool returned.
+   - Large or heavily-tagged filing PDFs can exceed the PDF reader's
+     extraction limits and fail outright. If that happens, say so plainly
+     and suggest the EDGAR path (for filings) instead of guessing at the
+     content."""
 
 
 RUN_LIMITS = {"recursion_limit": 30, "timeout_seconds": 180}
@@ -81,6 +94,9 @@ DEMO_QUERIES = [
     "net income for each?",
     "How can AI disrupt the healthcare industry? Base facts on sources.",
     "What was Stripe's net income last quarter?",   # reliability demo: refusal
+    "Analyze Apple's Quarterly Report: "
+    "https://s2.q4cdn.com/470004039/files/doc_earnings/2025/q3/filing/"
+    "10Q-Q3-2025-as-filed.pdf — what was net income for the period?",
 ]
 
 async def load_tools(list_only: bool = False):
@@ -96,12 +112,11 @@ async def load_tools(list_only: bool = False):
           f"{[t.name for t in curated]}\n")
     return curated
 
-async def run_query(agent, query: str, thread_id: str = "cli") -> str:
+async def run_query(agent, query: str) -> str:
     deadline = time.time() + RUN_LIMITS["timeout_seconds"]
     final = None
-    config = {"recursion_limit": RUN_LIMITS["recursion_limit"],
-              "configurable": {"thread_id": thread_id}}
-    async for chunk in agent.astream({"messages": [("user", query)]}, 
+    config = {"recursion_limit": RUN_LIMITS["recursion_limit"]}
+    async for chunk in agent.astream({"messages": [("user", query)]},
                                config=config, stream_mode="values"):
         final = chunk
         if time.time() > deadline:
@@ -122,13 +137,12 @@ async def main() -> None:
  
     tools = await load_tools()
     llm = ChatAnthropic(model="claude-sonnet-4-6", temperature=0, max_tokens=4000)
-    agent = create_agent(llm, tools, system_prompt=SYSTEM_PROMPT,
-                          checkpointer=InMemorySaver())
+    agent = create_agent(llm, tools, system_prompt=SYSTEM_PROMPT)
 
     if args.demo:
-        for i, q in enumerate(DEMO_QUERIES):
+        for q in DEMO_QUERIES:
             print(f"\n=== Q: {q}\n")
-            print(await run_query(agent, q, thread_id=f"demo-{i}"))
+            print(await run_query(agent, q))
     elif args.query:
         print(await run_query(agent, " ".join(args.query)))
     else:
