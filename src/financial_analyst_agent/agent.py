@@ -8,6 +8,7 @@ from typing import Any
 
 from langchain.agents import create_agent
 from langchain_anthropic import ChatAnthropic
+from langchain_core.messages import SystemMessage
 
 from .config import RUN_LIMITS
 from .mcp import load_tools
@@ -17,11 +18,23 @@ from .prompts import SYSTEM_PROMPT
 async def build_agent() -> Any:
     tools = await load_tools()
     llm = ChatAnthropic(
-        model="claude-sonnet-4-6", 
-        temperature=0, 
+        model="claude-sonnet-4-6",
+        temperature=0,
         max_tokens=4000
     )
-    return create_agent(llm, tools, system_prompt=SYSTEM_PROMPT)
+    # Anthropic renders tools -> system -> messages, so a cache_control
+    # breakpoint on the (stable) system prompt covers the tool definitions
+    # too, leaving only the per-query messages uncached.
+    system_message = SystemMessage(
+        content=[
+            {
+                "type": "text",
+                "text": SYSTEM_PROMPT,
+                "cache_control": {"type": "ephemeral"},
+            }
+        ]
+    )
+    return create_agent(llm, tools, system_prompt=system_message)
 
 
 async def run_query(agent: Any, query: str) -> str:

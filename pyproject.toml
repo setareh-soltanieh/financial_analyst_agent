@@ -13,7 +13,7 @@ dependencies = [
     "langgraph>=1.2.11",
     "openai>=3.3.1",
     "python-dotenv>=1.2.3",
-    "sec-edgar-mcp>=1.0.8",
+    "edgartools[ai]>=4.0.0",
 ]
 
 [project.scripts]
