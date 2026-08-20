@@ -1,5 +1,8 @@
 """Agent construction and query execution."""
 
+import braintrust
+braintrust.auto_instrument()  # this line should be before langchain imports
+
 import time
 from typing import Any
 
