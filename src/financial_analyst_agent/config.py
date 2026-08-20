@@ -60,10 +60,12 @@ ALLOWED_TOOLS = [
     "balance_sheet",
     "symbol_search",
 
-    "lookup",
-    "income",
-    "search",
-    "extract",
+    "tavily_search",
+    "tavily_extract",
+    "tavily_map",
+    "tavily_crawl",
+    "tavily_research",
+
     "pdf",
 ]
 
