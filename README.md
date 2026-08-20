@@ -1,53 +1,92 @@
 # Financial Analyst Agent
 
-<!-- TODO: One-sentence pitch — what does this agent do and for whom? -->
-An AI agent that answers financial research questions using SEC EDGAR filings and live web search, built with LangGraph.
+An MCP-powered CLI agent for researching public-company financial data from SEC
+filings, market-data services, PDFs, and web research.
+
+## Setup
+
+1. Install dependencies with `uv sync`.
+2. Copy `.env.example` to `.env` and populate the API keys you intend to use.
+3. Run a query:
+
+   ```bash
+   uv run financial-analyst-agent "What was Apple's latest quarterly net income?"
+   ```
+
+Use `uv run financial-analyst-agent --help` to see the interactive, demo, and
+tool-listing modes.
 
 ## Example queries
 
-<!-- TODO: Replace with real examples from your demo queries -->
 - "What was Google's net income based on their latest quarterly report?"
 - "What are the top 10 companies in healthcare?"
-- "What are the top 10 companies in healthcare, and what was the reported income for each of those 10 companies?"
+- "What are the top 10 companies in healthcare, and what was the reported income for each?"
 - "What was Apple's income and costs on their latest quarterly report?"
 
 ## Tools
 
-- sec-edgar-mcp: This is my primary financial statement source. It directly accesses SEC EDGAR and exposes standardized income statements, balance sheets and cash-flow statements. This tool is mainly used for answering the questions regarding the net income, etc.
-- Financial Modeling Prep (FMP): This tool is mainly used to answer questions regarding top-N companies by industry questions. FMP is convinient because its API already supports company screening, industry information and market capitalization.
-- Tavily MCP: I used this for my searches and particularly answering questions regarding AI disruption. 
-- citra pdf reader MCP: This is an MCP tool for reading PDF files so that if the user uploads a PDF the agent is able to read that pdf file
+- **SEC EDGAR MCP** — primary source for standardized SEC financial statements.
+- **Financial Modeling Prep** — company screening, industry, and market-cap data.
+- **Tavily MCP** — sourced web research, including industry and AI-adoption research.
+- **Citra** — reads user-provided PDFs.
+- **yfmcp** — sector and top-company rankings.
+
+## Evaluation
+
+`tests/financial_analyst.eval.py` runs both test sets (`financial_analyst_eval_dataset.json`
+and `test_set.jsonl`) through the real agent and logs results to
+[Braintrust](https://www.braintrust.dev). Each case is graded by an LLM judge
+that respects that case's own grading rules — factual vs. behavioral,
+`grading_note` tolerances (e.g. don't penalize stale market-cap snapshots),
+and the `pass`/`fail_if` criteria in `test_set.jsonl`.
+
+1. Set `BRAINTRUST_API_KEY` (and optionally `BRAINTRUST_PROJECT`) in `.env`.
+2. Run:
+
+   ```bash
+   uv run braintrust eval tests/financial_analyst.eval.py
+   ```
+
+This calls the live MCP tools and Anthropic API for every case, so it costs
+real API usage and can take a while for the full ~70-case set.
 
 ## Architecture
 
-The CLI discovers tools from every configured MCP server, curates them down to
-an allow-listed subset, and hands that subset to a single LangGraph agent.
-The agent (Claude) calls tools as needed and keeps per-thread memory via a
-checkpointer, so the CLI's interactive mode supports multi-turn follow-ups.
+The CLI delegates command-line handling to `cli.py`. `agent.py` builds the
+LangGraph agent and runs queries. `mcp.py` discovers MCP tools and selects the
+allow-listed subset, while `config.py` holds server configuration and runtime
+limits. The reliability contract lives in `prompts/financial_analyst.py`.
 
 ```mermaid
 flowchart TD
-    User(["User"]) --> CLI["agent.py CLI\n--list-tools / --demo / query / REPL"]
-    CLI --> Discover["load_tools()\nMultiServerMCPClient.get_tools()"]
-    Discover --> Curate["ALLOWED_TOOLS keyword filter\n(curated tool subset)"]
-    Curate --> Agent
-
-    subgraph Agent["LangGraph agent (create_agent)"]
-        LLM["Claude — claude-sonnet-4-6\nSYSTEM_PROMPT reliability contract"]
-        Memory[("InMemorySaver\nper-thread conversation memory")]
-        LLM <--> Memory
-    end
-
-    Agent -- "tool call" --> Servers
-    Servers -- "tool result" --> Agent
-    Agent -- "final answer" --> CLI
-    CLI --> User
+    User(["User"]) --> CLI["cli.py\n--list-tools / --demo / query / REPL"]
+    CLI --> Agent["agent.py\nbuild_agent() / run_query()"]
+    Agent --> Discover["mcp.py\nload_tools()"]
+    Discover --> Curate["ALLOWED_TOOLS keyword filter"]
+    Curate --> Graph["LangGraph agent"]
+    Graph -- "tool call" --> Servers
+    Servers -- "tool result" --> Graph
+    Graph -- "final answer" --> CLI
 
     subgraph Servers["MCP servers"]
-        SEC["sec_edgar (stdio)\nSEC filings & financial statements"]
-        TAV["tavily (streamable HTTP)\nweb search & extraction"]
-        CIT["citra (stdio, npx)\nPDF reading"]
-        FMP["fmp (streamable HTTP)\nmarket data — plan-limited"]
-        YF["yfmcp (stdio, uvx)\nsector / top-companies ranking"]
+        SEC["SEC EDGAR"]
+        TAV["Tavily"]
+        CIT["Citra"]
+        FMP["FMP"]
+        YF["yfmcp"]
     end
+```
+
+## Project layout
+
+```text
+src/financial_analyst_agent/
+├── __init__.py
+├── agent.py       # Agent construction and query execution
+├── cli.py         # CLI and interactive REPL
+├── config.py      # Environment-backed runtime configuration
+├── mcp.py         # MCP discovery and tool filtering
+└── prompts/
+    ├── __init__.py
+    └── financial_analyst.py
 ```
