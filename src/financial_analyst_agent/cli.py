@@ -19,6 +19,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Research public-company financial data.")
     parser.add_argument("--demo", action="store_true", help="Run built-in example queries.")
     parser.add_argument("--list-tools", action="store_true", help="List tools discovered from MCP servers.")
+    parser.add_argument("--list-allowed-tools", action="store_true", help="List all allowed tools from MCP servers.")
     parser.add_argument("query", nargs="*", help="Question for the agent.")
     return parser.parse_args()
 
@@ -28,6 +29,10 @@ async def main() -> None:
     if args.list_tools:
         await load_tools(list_only=True)
         return
+
+    if args.list_allowed_tools:
+            await load_tools(list_allowed_tools=True)
+            return
 
     agent = await build_agent()
     if args.demo:

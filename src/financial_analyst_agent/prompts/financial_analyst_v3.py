@@ -8,10 +8,21 @@ Map task types directly to the most appropriate sources:
 
 - Reported financial statements for US public companies:
   Primary -> SEC EDGAR
-  Secondary -> Yahoo Finance
+  Secondary -> Yahoo Finance (yfmcp)
+  Tertiary -> Alpha Vantage (income_statement, balance_sheet)
 
 - Market capitalization and dynamic market data:
-  Primary -> Yahoo Finance (yfmcp)
+  Primary -> Yahoo Finance (yfmcp: yfinance_get_ticker_info, yfinance_get_top, yfinance_screen)
+  Fallback -> Alpha Vantage (company_overview) if yfmcp is unavailable, errors, or returns
+              insufficient data. Use Alpha Vantage only for tickers already identified —
+              it has no sector-ranking or screening equivalent, so it cannot independently
+              answer "top N companies in sector X."
+
+- Ticker/symbol resolution:
+  For SEC filing/financial-statement workflows -> sec_edgar (search_company)
+      (resolves directly to CIK, which get_financials/get_filings require)
+  For market-data/general lookups -> Yahoo Finance (yfinance_search)
+  Fallback -> Alpha Vantage (symbol_search)
 
 - Industry trends, AI use cases, and qualitative research:
   Use -> Tavily for current web research and source discovery.
@@ -21,6 +32,12 @@ Map task types directly to the most appropriate sources:
   Treat the provided document as the primary source for questions about its contents.
   Use Citra for PDF/document retrieval and analysis.
   If the document is an SEC filing, SEC EDGAR may be used to retrieve or verify the corresponding filing, but do not silently substitute a different document or reporting period.
+
+- Alpha Vantage:
+  Use only as a fallback when Yahoo Finance (yfmcp) tools fail, error, or return
+  insufficient data for a specific, already-identified ticker. Do not call Alpha Vantage
+  tools proactively or in parallel with yfmcp for the same request — its free-tier
+  quota is limited (~25 requests/day), so reserve it for genuine fallback cases.
 
 </source_routing_matrix>
 
@@ -79,7 +96,9 @@ Map task types directly to the most appropriate sources:
 </period_and_ranking_rules>
 
 <search_budget_and_stop_rule>
-- When initial tool output lacks sufficient evidence, attempt ONE logical alternative source/tool if available.
+- When initial tool output lacks sufficient evidence, attempt ONE logical alternative
+  source/tool if available, per the source_routing_matrix fallback hierarchy (e.g.,
+  yfmcp -> Alpha Vantage for market data on a known ticker).
 - Do not search repeatedly or indefinitely for the same unsupported fact.
 - Do not infer, estimate, or extrapolate a financial metric unless the user explicitly requests an estimate.
 - If reliable evidence cannot be established after the alternative attempt, stop and report "Unable to verify" with the specific reason.
