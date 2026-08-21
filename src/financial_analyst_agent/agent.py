@@ -10,9 +10,10 @@ from langchain.agents import create_agent
 from langchain_anthropic import ChatAnthropic
 from langchain_anthropic.middleware import AnthropicPromptCachingMiddleware
 
-from .config import RUN_LIMITS
+from .config import RUN_LIMITS, TOOL_CACHE_ENABLED
 from .mcp import load_tools
 from .prompts import SYSTEM_PROMPT
+from .tool_cache import ToolCallCacheMiddleware
 
 
 async def build_agent() -> Any:
@@ -26,11 +27,16 @@ async def build_agent() -> Any:
     # breakpoint, and re-tags the last message on every turn with a second,
     # so the growing tool-call/tool-result history is cached incrementally
     # instead of resent uncached each turn.
+    middleware = [AnthropicPromptCachingMiddleware()]
+    if TOOL_CACHE_ENABLED:
+        # Persists tool-call results across runs (see tool_cache.py); set
+        # TOOL_CACHE_ENABLED=false to rule this out while debugging.
+        middleware.append(ToolCallCacheMiddleware())
     return create_agent(
         llm,
         tools,
         system_prompt=SYSTEM_PROMPT,
-        middleware=[AnthropicPromptCachingMiddleware()],
+        middleware=middleware,
     )
 
 
