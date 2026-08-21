@@ -8,7 +8,7 @@ from typing import Any
 
 from langchain.agents import create_agent
 from langchain_anthropic import ChatAnthropic
-from langchain_core.messages import SystemMessage
+from langchain_anthropic.middleware import AnthropicPromptCachingMiddleware
 
 from .config import RUN_LIMITS
 from .mcp import load_tools
@@ -22,19 +22,16 @@ async def build_agent() -> Any:
         temperature=0,
         max_tokens=4000
     )
-    # Anthropic renders tools -> system -> messages, so a cache_control
-    # breakpoint on the (stable) system prompt covers the tool definitions
-    # too, leaving only the per-query messages uncached.
-    system_message = SystemMessage(
-        content=[
-            {
-                "type": "text",
-                "text": SYSTEM_PROMPT,
-                "cache_control": {"type": "ephemeral"},
-            }
-        ]
+    # Tags the (stable) system prompt and tool definitions with one
+    # breakpoint, and re-tags the last message on every turn with a second,
+    # so the growing tool-call/tool-result history is cached incrementally
+    # instead of resent uncached each turn.
+    return create_agent(
+        llm,
+        tools,
+        system_prompt=SYSTEM_PROMPT,
+        middleware=[AnthropicPromptCachingMiddleware()],
     )
-    return create_agent(llm, tools, system_prompt=system_message)
 
 
 async def run_query(agent: Any, query: str) -> str:
