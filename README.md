@@ -62,29 +62,28 @@ user-PDF reader.
 
 ```mermaid
 flowchart TD
-    User(["User input"]) --> Interface{"Interface"}
-    Interface --> CLI["CLI"]
-    Interface --> UI["Streamlit UI"]
-    CLI --> Orchestration
-    UI --> Orchestration
+    User(["User input"]) --> CLI["CLI"]
+    User --> UI["Streamlit UI"]
+    CLI --> Agent
+    UI --> Agent
 
-    subgraph Orchestration["Agent orchestration"]
-        Model["Financial Analyst Agent\nClaude Sonnet-4-6"]
-        Guardrails["Execution guardrails\n30-step recursion / 180s timeout"]
-        Prompt["System prompt\nrouting, validation, stop rules"]
+    subgraph Agent["Agent orchestration - Claude Sonnet-4-6"]
+        Guardrails["Execution guardrails: 30-step recursion, 180s timeout"]
+        Prompt["System prompt: routing, validation, stop rules"]
     end
 
-    Orchestration --> Servers
+    Agent -- "tool call" --> Servers
+    Servers -- "tool result" --> Agent
 
     subgraph Servers["MCP tool integration layer"]
-        SEC["SEC EDGAR\nprimary filings and XBRL"]
-        YF["Yahoo Finance\nmarket data and screening"]
-        TAV["Tavily\nweb and qualitative research"]
-        AV["Alpha Vantage\nmarket data and screening"]
-        PDF["Citra\nuser-provided PDFs"]
+        SEC["SEC EDGAR: primary filings and XBRL"]
+        YF["Yahoo Finance: market data and screening"]
+        TAV["Tavily: web and qualitative research"]
+        AV["Alpha Vantage: market data fallback"]
+        PDF["Citra: user-provided PDFs"]
     end
 
-    Obs["Evaluation and observability\nBrainTrust, LangSmith, LLM-as-a-judge"] -.-> Orchestration
+    Obs["Evaluation and observability: BrainTrust, LangSmith, LLM-as-a-judge"] --> Agent
 ```
 
 ## Evaluation
