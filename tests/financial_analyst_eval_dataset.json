@@ -1,0 +1,926 @@
+[
+  {
+    "id": 1,
+    "category": "single_metric_extraction",
+    "question": "What was Microsoft's total revenue for fiscal year 2026 (the fiscal year ended June 30, 2026)?",
+    "answer": "$331.8 billion, up 18% year-over-year (16% in constant currency).",
+    "source": "Microsoft FY26 Q4 press release (results for FY ended June 30, 2026, reported July 2026): https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+    "difficulty": "easy",
+    "industry": "Software/Tech",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 2,
+    "category": "single_metric_extraction",
+    "question": "According to ExxonMobil's FY2023 annual results (year ended December 31, 2023) \u2014 not the most recent year \u2014 what was the company's full-year net income under U.S. GAAP?",
+    "answer": "$36.0 billion (reported as $36,010 million), or $8.89 per share diluted \u2014 down from $55.7 billion ($13.26/share) in FY2022.",
+    "source": "ExxonMobil \"ExxonMobil Announces 2023 Results\" press release, Feb 2, 2024: https://www.businesswire.com/news/home/20240201689947/en/ExxonMobil-Announces-2023-Results (consistent with FY2023 10-K, filed Feb 2024)",
+    "difficulty": "medium",
+    "industry": "Energy",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 3,
+    "category": "single_metric_extraction",
+    "question": "What was Ford Motor Company's reported (GAAP) diluted earnings per share for Q2 2026 (quarter ended June 30, 2026)? Ford also announced adjusted EPS of $0.42 for the quarter \u2014 make sure you report the GAAP figure, not the adjusted one.",
+    "answer": "GAAP diluted EPS was a LOSS of $(0.33) per share \u2014 a net loss attributable to Ford of $1,327 million \u2014 not the adjusted EPS of $0.42. The GAAP loss reflects roughly $3.6-4.2 billion of pre-tax special-item charges tied to the BlueOval SK joint-venture exit and EV program changes.",
+    "source": "Ford Motor Company Q2 2026 earnings release, July 28, 2026: https://s205.q4cdn.com/882619693/files/doc_financials/2026/q2/Ford-Motor-Company-Q2-2026-Press-Release.pdf ; corroborated by https://www.tradingview.com/news/tradingview:c7e5252a2c0d0:0-ford-motor-co-2q-2026-revenue-48-3b-eps-0-33-10-q-summary/",
+    "difficulty": "hard",
+    "industry": "Automotive",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 4,
+    "category": "multi_metric_extraction",
+    "question": "For Nvidia's fiscal Q1 2027 (quarter ended April 26, 2026), report: (a) total revenue, (b) GAAP gross margin, and (c) GAAP diluted EPS.",
+    "answer": "(a) Revenue: $81.6 billion (record, up 85% YoY, up 20% QoQ). (b) GAAP gross margin: 74.9% (non-GAAP: 75.0%). (c) GAAP diluted EPS: $2.39 (non-GAAP diluted EPS: $1.87).",
+    "source": "NVIDIA Announces Financial Results for First Quarter Fiscal 2027, May 20, 2026: https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
+    "difficulty": "medium",
+    "industry": "Semiconductors",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 5,
+    "category": "multi_metric_extraction",
+    "question": "For JPMorgan Chase's Q2 2026 (quarter ended June 30, 2026), report net income and diluted EPS on (a) a reported/GAAP basis and (b) excluding significant items. State what the significant items were.",
+    "answer": "(a) Reported/GAAP: net income $21.2 billion, diluted EPS $7.70. (b) Excluding significant items: net income $16.9 billion, diluted EPS $6.14. The significant items were a $4.6 billion net gain related to Visa shares (in Corporate) and $1.0 billion of gains on certain equity investments ($763 million in Corporate, $263 million in CIB) \u2014 a combined $4.2 billion after-tax benefit to reported net income.",
+    "source": "JPMorgan Chase 2Q26 Earnings Press Release (8-K Ex. 99.1), July 14, 2026: https://www.sec.gov/Archives/edgar/data/19617/000162828026048078/a2q26erfexhibit991narrative.htm ; full release: https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/6cded9fd-a164-4e6c-8cff-377357cf105c.pdf",
+    "difficulty": "hard",
+    "industry": "Banking/Financial Services",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 6,
+    "category": "multi_metric_extraction",
+    "question": "According to Walmart's FY2025 10-K (fiscal year ended January 31, 2025 \u2014 not the current fiscal year), report total revenue, operating income, and net income attributable to Walmart specifically (not consolidated net income, which includes noncontrolling interests).",
+    "answer": "Total revenue: $681.0 billion (net sales: $674.5 billion). Operating income: $29.3 billion (up 8.6% YoY). Net income attributable to Walmart: $19.436 billion \u2014 this differs from consolidated net income of $20.157 billion, which includes $721 million attributable to noncontrolling interests (e.g., minority stakes in Walmex, Flipkart, PhonePe).",
+    "source": "Walmart Inc. FY2025 Form 10-K, filed March 2025: https://www.sec.gov/Archives/edgar/data/104169/000010416925000021/wmt-20250131.htm",
+    "difficulty": "medium",
+    "industry": "Retail/Consumer",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 7,
+    "category": "company_ranking",
+    "question": "List the top 5 U.S. banks by market capitalization as of today, with each bank's market cap.",
+    "answer": "As of Aug 21, 2026: 1) JPMorgan Chase – $947.11B; 2) Bank of America – $436.82B; 3) Morgan Stanley – $331.95B; 4) Goldman Sachs – $297.50B; 5) Wells Fargo – $255.92B. (Citigroup is 6th at $220.46B.)",
+    "grading_note": "GRADE ON: (a) correct set of 5 companies, (b) correct relative order. DO NOT grade on exact dollar figures matching - market cap moves continuously and this snapshot will be stale within hours. Re-verify current market caps immediately before each eval run rather than treating these dollar values as fixed ground truth; only the membership/ranking is durable, and even that should be re-checked if the eval is run more than ~1-2 weeks after this dataset was built.",
+    "source": "CompaniesMarketCap.com, live-pulled Aug 19, 2026: https://companiesmarketcap.com/banks/largest-banks-by-market-cap/",
+    "difficulty": "easy",
+    "industry": "Banking/Financial Services",
+    "requires_tools": [
+      "market_data",
+      "ranking"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 8,
+    "category": "company_ranking",
+    "question": "List the top 5 semiconductor companies by market capitalization. Would this ranking change if ranked by revenue instead? Explain briefly.",
+    "answer": "By market cap (Aug 21, 2026): 1) Nvidia – $5.209T; 2) TSMC – $2.166T; 3) Broadcom – $1.741T; 4) Samsung Electronics – $1.333T; 5) Micron Technology – $1.088T. Yes, a revenue-based ranking would differ: Samsung's total revenue spans consumer electronics/mobile/displays beyond chips, TSMC is a pure-play foundry so its full revenue is semiconductor revenue, and Nvidia trades at a much richer valuation multiple relative to its revenue than Samsung — so 'top semiconductor companies' needs the metric and date specified.",
+    "grading_note": "GRADE ON: correct set of 5 companies and relative order, plus the qualitative point that market-cap and revenue rankings diverge for diversified vs. pure-play companies. DO NOT grade on exact dollar figures - re-verify current market caps before each eval run; treat this snapshot as illustrative, not permanent ground truth.",
+    "source": "CompaniesMarketCap.com, live-pulled Aug 19, 2026: https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/",
+    "difficulty": "medium",
+    "industry": "Semiconductors",
+    "requires_tools": [
+      "market_data",
+      "ranking"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 9,
+    "category": "ai_disruption",
+    "question": "How is AI disrupting the pharmaceutical and healthcare industry? Give the main use cases.",
+    "answer": "RUBRIC - a complete answer should cover at least 4 of: (1) Drug discovery & R&D acceleration - AI for target identification, molecule design, predicting trial success (e.g., Pfizer's stated ambition to build an 'AI-native R&D organization' spanning target discovery through medical evidence); (2) Diagnostics & medical imaging - AI-assisted radiology/pathology and early-disease detection; (3) Clinical trial optimization - AI-driven patient recruitment/matching and trial design; (4) Manufacturing & yield optimization - AI reducing cost and improving yields in pharma manufacturing; (5) Commercial/field effectiveness - AI-driven sales and marketing targeting; (6) Administrative automation - AI for prior authorization, claims processing, clinical documentation across the broader healthcare system. Each point should be named with its mechanism, not just listed.",
+    "source": "Grounding example: Pfizer Q2 2026 earnings call, Aug 4, 2026 (management commentary on AI in R&D and manufacturing): https://www.theglobeandmail.com/investing/markets/stocks/PFE/pressreleases/3784174/pfizer-pfe-q2-2026-earnings-call-transcript/ ; remaining points are general industry knowledge, graded as a rubric not verbatim text.",
+    "difficulty": "easy",
+    "industry": "Healthcare/Pharma",
+    "requires_tools": [
+      "ai_analysis"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 10,
+    "category": "ai_disruption",
+    "question": "Explain how AI is disrupting the retail industry, including major use cases.",
+    "answer": "RUBRIC - a complete answer should cover at least 4-5 of: (1) Personalized recommendations & search - AI-driven product discovery/personalization; (2) Demand forecasting & inventory/supply chain optimization - reducing stockouts/overstock; (3) Dynamic/algorithmic pricing; (4) AI customer service - chatbots and virtual shopping assistants; (5) Warehouse & fulfillment automation - robotics and computer vision in distribution centers; (6) Generative AI for marketing content and product copy; (7) Loss prevention / computer-vision checkout ('grab and go' retail). Each point should name the disruption mechanism (labor substitution, margin improvement, or customer-experience change), not just list the use case.",
+    "source": "General industry knowledge; qualitative rubric, no single filing citation required per plan.",
+    "difficulty": "medium",
+    "industry": "Retail/Consumer",
+    "requires_tools": [
+      "ai_analysis"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 11,
+    "category": "compound_multi_tool",
+    "question": "Identify the top 2 U.S. banks by market capitalization today, and report each one's Q2 2026 (quarter ended June 30, 2026) GAAP net income.",
+    "answer": "Top 2 U.S. banks by market cap (Aug 19, 2026): 1) JPMorgan Chase ($965.58B) and 2) Bank of America ($449.14B). Q2 2026 GAAP net income: JPMorgan Chase - $21.2 billion reported/GAAP (note: $16.9B excluding significant items - a Visa share gain and other equity gains). Bank of America - $9.1 billion GAAP net income (diluted EPS $1.21), up 27% YoY.",
+    "grading_note": "GRADE the ranking portion (top 2 bank identification) the same way as standalone ranking sample #7: correct membership/order, NOT exact market-cap dollar figures - re-verify before each eval run. GRADE the net income figures (JPMorgan $21.2B/$16.9B, Bank of America $9.1B) exactly - these are financial-statement facts from primary filings, not time-decaying market snapshots, and should NOT receive the same tolerance.",
+    "source": "Ranking: CompaniesMarketCap.com banks page (Aug 19, 2026): https://companiesmarketcap.com/banks/largest-banks-by-market-cap/. JPMorgan: 2Q26 earnings release: https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2026/2nd-quarter/6cded9fd-a164-4e6c-8cff-377357cf105c.pdf. Bank of America: Q2 2026 earnings release, July 14, 2026: https://www.prnewswire.com/news-releases/bank-of-america-reports-second-quarter-2026-financial-results-302824919.html",
+    "difficulty": "medium",
+    "industry": "Banking/Financial Services",
+    "requires_tools": [
+      "market_data",
+      "ranking",
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 12,
+    "category": "compound_multi_tool",
+    "question": "Identify the largest semiconductor company by market cap. Report its most recent reported quarterly revenue and GAAP gross margin. Then compute ExxonMobil's FY2023 GAAP net profit margin (net income / total revenue) and compare the two margins.",
+    "answer": "Largest semiconductor company by market cap: Nvidia ($5.322T, Aug 19, 2026). Most recent reported quarter: Q1 FY2027 (ended April 26, 2026) - revenue $81.6B, GAAP gross margin 74.9%. ExxonMobil FY2023: GAAP net income $36.010B / total revenue $344.58B ~ 10.4% net profit margin. Nvidia's gross margin (74.9%) is far higher than ExxonMobil's full-year net margin (~10.4%) - but this is not a like-for-like comparison: gross margin (revenue minus cost of goods sold) and net profit margin (net income over revenue, after all operating costs, interest, and taxes) measure different things. A fair comparison would use Nvidia's net margin instead (not requested here, but a careful agent should flag the mismatch rather than presenting the raw numbers as directly comparable).",
+    "grading_note": "GRADE the 'largest semiconductor company' identification the same way as standalone ranking sample #8: correct company (Nvidia), not exact market-cap dollar value - re-verify before each eval run. This identification is low-volatility (Nvidia leads #2 TSMC by over $3T), so ranking risk is minimal here, but the same non-exact-dollar tolerance still formally applies. GRADE the revenue/margin figures and the gross-vs-net-margin comparability point exactly - these are financial-statement facts and analytical reasoning, not market snapshots.",
+    "source": "Nvidia Q1 FY2027 release: https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027. ExxonMobil FY2023 net income: https://www.businesswire.com/news/home/20240201689947/en/ExxonMobil-Announces-2023-Results. ExxonMobil FY2023 total revenue ($344.58B, from 10-K): https://www.stock-analysis-on.net/NYSE/Company/Exxon-Mobil-Corp/Financial-Statement/Income-Statement. Semiconductor ranking: https://companiesmarketcap.com/semiconductors/largest-semiconductor-companies-by-market-cap/",
+    "difficulty": "hard",
+    "industry": "Semiconductors / Energy (cross-industry)",
+    "requires_tools": [
+      "market_data",
+      "ranking",
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 13,
+    "category": "compound_multi_tool",
+    "question": "Where did Ford rank among U.S. automakers by revenue in 2024, and what were its Q2 2026 GAAP revenue and net income/loss?",
+    "answer": "Ford was the second-largest automaker by revenue in the U.S. in 2024 (behind General Motors). For Q2 2026 (quarter ended June 30, 2026): GAAP total revenue was $48.3 billion (down from $50.2 billion a year earlier), and GAAP net loss attributable to Ford was $1,327 million (diluted EPS $(0.33)), driven by roughly $3.6-4.2 billion of pre-tax special-item charges tied to the BlueOval SK joint-venture exit and EV program changes.",
+    "grading_note": "The 2024 revenue-rank fact is a settled historical figure (not a live market-cap snapshot), so exact-match grading is appropriate for it, unlike the live market-cap rankings elsewhere in this set. The Q2 2026 financial figures should also be graded exactly against the primary filing.",
+    "source": "2024 ranking fact: Fortune company profile: https://fortune.com/company/ford-motor/earnings/q2-2026/. Q2 2026 financials: Ford earnings release, July 28, 2026: https://s205.q4cdn.com/882619693/files/doc_financials/2026/q2/Ford-Motor-Company-Q2-2026-Press-Release.pdf",
+    "difficulty": "medium",
+    "industry": "Automotive",
+    "requires_tools": [
+      "ranking",
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 14,
+    "category": "edge_case",
+    "edge_case_type": "unanswerable_subpart",
+    "question": "For Ford Motor Company and Bank of America, report each company's Q2 2026 GAAP net income/loss and its non-GAAP 'adjusted EPS' figure for the same quarter.",
+    "answer": "Ford Motor Company Q2 2026: GAAP net loss attributable to Ford of $1,327 million (diluted EPS $(0.33)); Ford's standard non-GAAP 'adjusted EPS' for the quarter was $0.42. Bank of America Q2 2026: GAAP net income of $9.1 billion (diluted EPS $1.21), up 27% YoY. UNANSWERABLE SUB-PART: Bank of America's standard quarterly earnings release does not present a distinct non-GAAP 'adjusted EPS' metric analogous to Ford's - its $1.21 diluted EPS is the GAAP figure and the primary number the company reports. A correct answer must flag this sub-part as not available in the requested form rather than fabricate an adjusted figure or silently substitute the GAAP number without noting the substitution.",
+    "source": "Ford Q2 2026 earnings release: https://s205.q4cdn.com/882619693/files/doc_financials/2026/q2/Ford-Motor-Company-Q2-2026-Press-Release.pdf. Bank of America Q2 2026 earnings release (no adjusted/non-GAAP EPS metric presented), July 14, 2026: https://www.prnewswire.com/news-releases/bank-of-america-reports-second-quarter-2026-financial-results-302824919.html",
+    "difficulty": "hard",
+    "industry": "Automotive / Banking (cross-industry)",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 15,
+    "category": "edge_case",
+    "edge_case_type": "adversarial_vague",
+    "grading_type": "behavioral",
+    "question": "How's the company doing this quarter?",
+    "answer": "No matchable factual answer - correct behavior is to ask a clarifying question (which company, which quarter/period, which metric) rather than default to a company or fabricate figures.",
+    "source": "N/A - process/robustness test. Grading criterion: did the agent ask for clarification instead of fabricating or silently assuming a company/metric/period.",
+    "difficulty": "medium",
+    "industry": "N/A",
+    "requires_tools": [],
+    "needs_verification": false
+  },
+  {
+    "id": 16,
+    "category": "single_metric_extraction",
+    "question": "What was Boeing's GAAP diluted loss per share for Q2 2026 (quarter ended June 30, 2026)? Boeing also reports a non-GAAP 'core loss per share' metric for the same quarter - don't confuse the two.",
+    "answer": "GAAP diluted loss per share was $(0.67) (net loss of $428 million on revenue of $24.56 billion). Boeing's non-GAAP 'core loss per share' was actually WORSE at $(0.76) - an unusual case where the non-GAAP figure is more negative than GAAP, the opposite of the more common pattern where non-GAAP excludes bad news and looks better. Core EPS excludes the FAS/CAS pension service-cost adjustment, which was a net favorable item to GAAP earnings this quarter.",
+    "source": "Boeing Reports Second Quarter Results, July 28, 2026: https://boeing.mediaroom.com/2026-07-28-Boeing-Reports-Second-Quarter-Results ; press release PDF: https://s2.q4cdn.com/661678649/files/doc_financials/2026/q2/Press-Release.pdf",
+    "difficulty": "hard",
+    "industry": "Industrials/Aerospace & Defense",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 17,
+    "category": "single_metric_extraction",
+    "question": "What were The Coca-Cola Company's (NYSE: KO) net operating revenues for Q2 2026 (quarter ended June 2026)?",
+    "answer": "$13.38 billion (reported as $13,380 million), up 7% year-over-year from $12.5 billion.",
+    "source": "Coca-Cola Reports Second Quarter 2026 Results, July 28, 2026: https://www.coca-colacompany.com/media-center/coca-cola-reports-second-quarter-2026-results",
+    "difficulty": "medium",
+    "industry": "Consumer Staples/Food & Bev",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 18,
+    "category": "multi_metric_extraction",
+    "question": "For Delta Air Lines' Q2 2026 (June quarter), report (a) GAAP total operating revenue, (b) adjusted revenue as Delta defines it, (c) GAAP net income, and (d) adjusted EPS. Delta's press release headline cites 'record revenue of $17.7 billion' - identify which of these figures that actually refers to.",
+    "answer": "(a) GAAP total operating revenue: $19.76 billion (up 19% YoY). (b) Adjusted revenue (excludes third-party refinery sales and certain other items): $17.7 billion (up 14% YoY) - this is the 'record revenue' figure in Delta's headline, NOT the GAAP total. (c) GAAP net income: $1.6 billion (diluted EPS $2.44), down 25% YoY. (d) Adjusted EPS: $1.56 (adjusted net income ~$1.03 billion).",
+    "source": "Delta Air Lines Announces June Quarter 2026 Financial Results, July 10, 2026: https://s2.q4cdn.com/181345880/files/doc_earnings/2026/q2/earnings-result/Delta-Air-Lines-Announces-Second-Quarter-2026.pdf ; corroborated: https://www.cnbc.com/2026/07/10/delta-air-lines-dal-q2-2026-earnings.html",
+    "difficulty": "hard",
+    "industry": "Airlines/Transport",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 19,
+    "category": "multi_metric_extraction",
+    "question": "For Coca-Cola Consolidated, Inc. (NASDAQ: COKE) - the independent Coca-Cola bottler, not The Coca-Cola Company - report Q2 2026 net sales, operating income, and net income.",
+    "answer": "Net sales: $2.05 billion ($2,052.4 million), up 10.6% YoY. Operating income (income from operations): $271.3 million. Net income: $158.8 million (adjusted diluted EPS $2.83). This is a materially smaller, legally separate public company from The Coca-Cola Company (KO), despite the shared brand name.",
+    "source": "Coca-Cola Consolidated Reports Second Quarter and First Half 2026 Results, Aug 5, 2026: https://www.globenewswire.com/news-release/2026/08/05/3339728/0/en/Coca-Cola-Consolidated-Reports-Second-Quarter-and-First-Half-2026-Results.html ; corroborated: https://www.tradingview.com/news/tradingview:05d7d0d323586:0-coca-cola-consolidated-reports-q2-revenue-2-05b-gross-profit-778m-net-income-158-8m/",
+    "difficulty": "medium",
+    "industry": "Consumer Staples/Food & Bev",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 20,
+    "category": "multi_metric_extraction",
+    "question": "For Boeing's Q2 2026, report total company revenue, Defense, Space & Security (BDS) segment revenue, and that segment's operating income or loss.",
+    "answer": "Total company revenue: $24.56 billion. BDS segment revenue: $7.48 billion, up 13% YoY. BDS segment operating result: a $15 million operating LOSS (swung from a $110 million operating profit a year earlier), driven mainly by a $280 million pre-tax charge on the VC-25B (new Air Force One) program.",
+    "source": "Boeing Q2 2026 earnings release (as above) and https://www.aerotime.aero/articles/boeing-q2-2026-positive-cash-flow-revenue",
+    "difficulty": "medium",
+    "industry": "Industrials/Aerospace & Defense",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 21,
+    "category": "company_ranking",
+    "question": "List the top 5 aerospace companies by market capitalization today.",
+    "answer": "As of Aug 21, 2026: 1) SpaceX – $1.765T; 2) General Electric (GE Aerospace) – $357.58B; 3) RTX – $286.11B; 4) Airbus – $189.56B; 5) Boeing – $169.88B.",
+    "grading_note": "GRADE ON: correct membership and relative order as of the stated date. DO NOT grade on exact dollar figures. This list is especially volatile right now because SpaceX just IPO'd (June 2026) and its price is still finding a level - re-verify before each eval run rather than trusting this snapshot as fixed.",
+    "source": "CompaniesMarketCap.com, live-pulled Aug 19, 2026: https://companiesmarketcap.com/aerospace/largest-companies-by-market-cap/",
+    "difficulty": "medium",
+    "industry": "Industrials/Aerospace & Defense",
+    "requires_tools": [
+      "market_data",
+      "ranking"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 22,
+    "category": "ai_disruption",
+    "question": "How is AI disrupting the energy industry (oil & gas and utilities)? Give the main use cases.",
+    "answer": "RUBRIC - a complete answer should cover at least 4 of: (1) Predictive maintenance for rigs, turbines, and pipelines, reducing unplanned downtime; (2) Grid optimization & demand forecasting for utilities managing variable renewable supply; (3) Subsurface/seismic data interpretation accelerating oil & gas exploration; (4) AI-driven trading and commodity price forecasting; (5) Autonomous drilling optimization and robotic/drone inspection; (6) Emissions and methane-leak detection via satellite and AI image analysis. Each point should name the mechanism (cost reduction, safety, forecasting accuracy), not just list the use case.",
+    "source": "General industry knowledge; qualitative rubric, no single filing citation required per plan.",
+    "difficulty": "easy",
+    "industry": "Energy",
+    "requires_tools": [
+      "ai_analysis"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 23,
+    "category": "ai_disruption",
+    "question": "Explain how AI is disrupting banking and financial services, including major use cases.",
+    "answer": "RUBRIC - a complete answer should cover at least 4-5 of: (1) Fraud detection & anti-money-laundering via real-time transaction anomaly detection; (2) Credit underwriting and risk scoring; (3) Algorithmic/AI-driven trading; (4) Customer service chatbots and virtual assistants; (5) Personalized wealth management / robo-advisors; (6) Back-office automation - document processing, KYC, compliance reporting; (7) AI-assisted investment research and equity analysis. Each point should name the disruption mechanism (risk reduction, cost/labor substitution, speed, personalization).",
+    "source": "General industry knowledge; qualitative rubric.",
+    "difficulty": "medium",
+    "industry": "Banking/Financial Services",
+    "requires_tools": [
+      "ai_analysis"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 24,
+    "category": "compound_multi_tool",
+    "question": "Compare Q2 2026 revenue growth: The Coca-Cola Company vs. Boeing. Which grew faster year-over-year, and by how much? Does faster revenue growth mean the more profitable company?",
+    "answer": "Coca-Cola (KO) Q2 2026 net operating revenues grew 7% YoY to $13.38B. Boeing Q2 2026 revenue grew 8% YoY to $24.56B - Boeing grew slightly faster in percentage terms. But revenue growth doesn't track profitability here: Boeing remained net-loss-making ($428M GAAP net loss, diluted loss per share $(0.67)) while Coca-Cola was solidly profitable ($4.425B net income, diluted EPS $1.03). A correct answer must flag that faster top-line growth (Boeing) does not imply the more profitable or financially healthier company.",
+    "source": "Coca-Cola Q2 2026: https://www.coca-colacompany.com/media-center/coca-cola-reports-second-quarter-2026-results. Boeing Q2 2026: https://boeing.mediaroom.com/2026-07-28-Boeing-Reports-Second-Quarter-Results",
+    "difficulty": "medium",
+    "industry": "Consumer Staples / Industrials (cross-industry)",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 25,
+    "category": "compound_multi_tool",
+    "question": "What was Disney's combined Disney+ and Hulu streaming (Direct-to-Consumer) operating income for its most recently reported quarter? Also report the Hulu-specific portion of that figure.",
+    "answer": "Disney's combined Disney+/Hulu streaming operating income for fiscal Q3 2026 (quarter ended ~June 2026, reported Aug 5, 2026) was $712 million. UNANSWERABLE SUB-PART: Disney does not disclose a Hulu-specific revenue or operating-income figure. Hulu's financials have been fully consolidated into Disney's Direct-to-Consumer/Entertainment segment since Disney completed 100% ownership (finalized 2025), and Disney discontinued even standalone Hulu subscriber/ARPU disclosure starting fiscal Q1 2026. A correct answer states plainly that the Hulu-only split isn't disclosed in Disney's public filings, rather than estimating or fabricating a number.",
+    "source": "Combined figure: 'Disney+, Hulu Combined Profit Hits $712 Million in Q3,' TheWrap, Aug 2026: https://www.thewrap.com/industry-news/business/disney-earnings-q3-2026/. Discontinued Hulu standalone disclosure: https://sqmagazine.co.uk/hulu-statistics/",
+    "difficulty": "hard",
+    "industry": "Media/Entertainment",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 26,
+    "category": "edge_case",
+    "edge_case_type": "post_cutoff_answerable",
+    "question": "Is SpaceX a publicly traded company? If so, what is its market cap and ticker, and how much did its IPO raise?",
+    "answer": "Yes. SpaceX (Space Exploration Technologies Corp.) priced its IPO on June 11-12, 2026 at $135/share, selling 555.56 million shares for an initial $75 billion raised - the largest IPO in history even before any overallotment. On June 15, 2026, underwriters (including Goldman Sachs and Morgan Stanley) fully exercised the 'greenshoe' overallotment option, purchasing an additional 83.3 million shares and bringing the FINAL total raised to $85.7 billion. Both figures are real and correct for different things: $75B = the base offering size at pricing; $85.7B = the final total including the exercised overallotment. If asked simply 'how much did the IPO raise,' the $85.7B final figure is the more complete answer, but a precise response should distinguish the two rather than citing only one. SpaceX trades on Nasdaq under ticker SPCX. As of Aug 19, 2026 its market cap is ~$1.889 trillion, the largest aerospace company by market cap.",
+    "grading_note": "This event postdates most models' training cutoffs (~Jan 2026) but is real, already occurred, and fully searchable. Two failure modes to catch: (1) stating 'SpaceX is private' from stale memory, (2) refusing to answer citing no real-time data access. Correct behavior: search and answer. Mirror-image counterpart to sample #28 (Nvidia Q2 FY27), where correct behavior is the opposite - decline because the data genuinely doesn't exist yet. The market-cap figure ($1.889T) is a live snapshot and should get the same non-exact-dollar tolerance as the standalone ranking samples; the IPO proceeds figures ($75B / $85.7B) are settled historical facts and should be graded exactly.",
+    "source": "Base offering: https://www.forbes.com/sites/tylerroush/2026/06/15/spacex-says-historic-ipo-raised-more-than-85-billion/ ; greenshoe/final total: https://www.cnbc.com/2026/06/15/spacex-ipo-spcx-greenshoe-overallotment.html ; current market cap, live-pulled Aug 19, 2026: https://companiesmarketcap.com/aerospace/largest-companies-by-market-cap/",
+    "difficulty": "hard",
+    "industry": "Aerospace/Space",
+    "requires_tools": [
+      "report_lookup",
+      "market_data"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 27,
+    "category": "edge_case",
+    "edge_case_type": "no_public_filings",
+    "question": "What was Cargill's total revenue and net income for its most recent fiscal year, according to its 10-K filing?",
+    "answer": "Unanswerable as posed - Cargill, Incorporated is privately held (majority-owned by the Cargill and MacMillan founding families) and does not file a 10-K or any periodic report with the SEC, because it has no publicly traded equity or debt requiring such disclosure. There is no ticker symbol and no audited public financial statement. Commonly cited third-party revenue estimates ($113B-$177B depending on year/source) come from Forbes' private-company rankings or press estimates, NOT from a 10-K - a correct answer says so explicitly rather than presenting an estimate as if it were filing-sourced.",
+    "source": "Multiple 2026 confirmations of private status: https://pestel-analysis.com/blogs/owners/cargill (Jul 2026); https://www.bitget.com/wiki/does-blackrock-own-cargill-stock",
+    "difficulty": "medium",
+    "industry": "N/A (private, diversified agriculture/food/industrial)",
+    "requires_tools": [
+      "report_lookup"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 28,
+    "category": "edge_case",
+    "edge_case_type": "future_unreported_quarter",
+    "question": "What was Nvidia's revenue and net income for fiscal Q2 2027 (quarter ended around July 2026)?",
+    "answer": "Unanswerable as of today (Aug 19, 2026) - Nvidia has not yet reported Q2 FY2027 results. The company is scheduled to report on August 26, 2026, for the fiscal quarter that ended around July 27, 2026. Nvidia's own guidance (given May 20, 2026) was for revenue of approximately $91.0 billion, +/-2% - but that is guidance, not an actual result, and must not be presented as the answer. A correct response states the figure isn't available yet and gives the reporting date, rather than fabricating a number or passing off guidance as an actual.",
+    "source": "NVIDIA Q1 FY2027 CFO Commentary (guidance for Q2): https://www.sec.gov/Archives/edgar/data/1045810/000104581026000051/q1fy27cfocommentary.htm ; Q2 FY27 earnings date: https://www.itechguides.com/nvidia-stock-earnings-preview-q2-fy27-report-date-estimates-and-key-risks/",
+    "difficulty": "medium",
+    "industry": "Semiconductors",
+    "requires_tools": [
+      "report_lookup"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 29,
+    "category": "edge_case",
+    "edge_case_type": "ticker_name_collision",
+    "grading_type": "behavioral",
+    "question": "What was Coca-Cola's revenue last quarter?",
+    "answer": "No single matchable factual answer - 'Coca-Cola' could mean either of two genuinely distinct public companies: (1) The Coca-Cola Company (NYSE: KO), the global beverage/concentrate company - Q2 2026 net operating revenues $13.38 billion; or (2) Coca-Cola Consolidated, Inc. (NASDAQ: COKE), an independent bottler roughly 1/6th the size - Q2 2026 net sales $2.05 billion. These are separate filers, not a parent/subsidiary pair (COKE independently licenses Coca-Cola trademarks/concentrate). Correct behavior: ask which entity is meant, or answer for one while explicitly flagging that the other exists. Failure modes: silently picking one without disambiguating, or blending the two figures.",
+    "source": "KO Q2 2026: https://www.coca-colacompany.com/media-center/coca-cola-reports-second-quarter-2026-results. COKE Q2 2026: https://www.globenewswire.com/news-release/2026/08/05/3339728/0/en/Coca-Cola-Consolidated-Reports-Second-Quarter-and-First-Half-2026-Results.html",
+    "difficulty": "medium",
+    "industry": "Consumer Staples/Food & Bev",
+    "requires_tools": [
+      "report_lookup"
+    ],
+    "needs_verification": false
+  },
+  {
+    "id": 30,
+    "category": "single_metric_extraction",
+    "question": "What was SpaceX's consolidated revenue for Q1 2026 (three months ended March 31, 2026), per its IPO prospectus?",
+    "answer": "$4,694 million (~$4.69 billion), with a loss from operations of $(1,943) million and Adjusted EBITDA of $1,127 million.",
+    "source": "Space Exploration Technologies Corp. Form S-1, filed May 20, 2026: https://www.sec.gov/Archives/edgar/data/1181412/000162828026036936/spaceexplorationtechnologi.htm",
+    "difficulty": "easy",
+    "industry": "Aerospace/Space",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 31,
+    "category": "single_metric_extraction",
+    "question": "What was Verizon's GAAP net income attributable to Verizon for Q2 2026 (quarter ended June 30, 2026)?",
+    "answer": "$3,835 million (~$3.8 billion), down 22.9% year-over-year. GAAP diluted EPS was $0.92, down 22% YoY.",
+    "source": "Verizon 10-Q / 2Q26 results, July 24, 2026: https://www.stocktitan.net/sec-filings/VZ/10-q-verizon-communications-inc-quarterly-earnings-report-c7c9c762da0b.html ; https://www.globenewswire.com/news-release/2026/07/24/3332775/0/en/Verizon-Delivers-Record-2Q26-Results-as-Strategic-Transformation-Ignites-Accelerated-Growth.html",
+    "difficulty": "medium",
+    "industry": "Telecom",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 32,
+    "category": "single_metric_extraction",
+    "question": "What was Medtronic's total GAAP revenue for fiscal year 2026 (ended April 24, 2026)?",
+    "answer": "$36.364 billion, up 8.4% year-over-year as reported (5.8% organic) - Medtronic's highest annual revenue growth in 10 years.",
+    "source": "Medtronic FY26 Q4/full-year results, June 3, 2026: https://www.prnewswire.com/news-releases/medtronic-reports-fourth-quarter-and-full-year-fiscal-2026-results-delivers-highest-annual-revenue-growth-in-10-years-302789415.html",
+    "difficulty": "easy",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 33,
+    "category": "single_metric_extraction",
+    "question": "For Medtronic's fiscal year 2026, did GAAP diluted EPS or non-GAAP diluted EPS grow faster year-over-year? Give both figures and growth rates.",
+    "answer": "Counterintuitively, GAAP diluted EPS grew FASTER: FY26 GAAP diluted EPS was $3.73, up 3.3% YoY, vs. non-GAAP diluted EPS of $5.53, up only 0.7% YoY - the reverse of the more common pattern where the non-GAAP figure (which strips out one-time charges) shows the higher growth rate. This happens when the prior-year GAAP base carried heavier one-time charges that didn't recur, giving GAAP a bigger YoY lift even as non-GAAP growth is held back by other factors not visible from the headline alone.",
+    "source": "Medtronic FY26 full-year results (as above)",
+    "difficulty": "hard",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 34,
+    "category": "multi_metric_extraction",
+    "question": "For Toyota Motor Corporation's fiscal year 2026 (ended March 31, 2026), report consolidated net revenue, operating income, and net income attributable to Toyota - and note what currency, accounting standard, and SEC filing type these figures come from.",
+    "answer": "Net revenue: 50,684.9 billion yen (~$335.7B). Operating income: 3,766.2 billion yen (~$24.9B), down from 4,795 billion yen a year earlier, partly due to a 1,380.0 billion yen negative U.S. tariff impact. Net income attributable to Toyota: 3,848.0 billion yen (~$25.6B). These figures are reported in Japanese yen under IFRS (not U.S. GAAP), for a fiscal year running April 2025-March 2026 (not calendar year), and filed with the SEC as an annual Form 20-F (the annual-report equivalent for foreign private issuers) rather than a 10-K - Toyota does not file quarterly 10-Qs, though it does furnish periodic unaudited 6-K reports with semi-annual/quarterly data.",
+    "source": "TMC Announces April Through March 2026 Financial Results: https://pressroom.toyota.com/tmc-announces-april-through-march-2026-financial-results/ ; Form 20-F filing confirmation: https://www.stocktitan.net/sec-filings/TM/20-f-toyota-motor-corp-files-annual-report-foreign-issuer-6e6d756b76f7.html",
+    "difficulty": "medium",
+    "industry": "Automotive (non-US filer)",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 35,
+    "category": "multi_metric_extraction",
+    "question": "For Verizon's Q2 2026, report GAAP net income, GAAP diluted EPS, and adjusted EPS. These moved in OPPOSITE directions year-over-year - explain why.",
+    "answer": "GAAP net income: $3,835 million, down 22.9% YoY. GAAP diluted EPS: $0.92, down 22% YoY. Adjusted (non-GAAP) EPS: $1.30, UP 6.6% YoY. The divergence comes from one-time/non-operating items in GAAP results - including costs tied to the Frontier Communications and Starry Group acquisitions completed in 2026 - that are excluded from the adjusted figure, dragging down reported GAAP earnings even as underlying adjusted performance improved (record adjusted EBITDA of $13.7B, up 7.2%).",
+    "source": "Verizon Delivers Record 2Q26 Results, July 24, 2026: https://www.globenewswire.com/news-release/2026/07/24/3332775/0/en/Verizon-Delivers-Record-2Q26-Results-as-Strategic-Transformation-Ignites-Accelerated-Growth.html ; https://www.stocktitan.net/news/VZ/verizon-delivers-record-2q26-results-as-strategic-transformation-yso43kyl8it7.html",
+    "difficulty": "hard",
+    "industry": "Telecom",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 36,
+    "category": "multi_metric_extraction",
+    "question": "Distinguish Medtronic's Q4 FY2026 (quarter) revenue from its full FY2026 (year) revenue - give both figures and the periods each covers.",
+    "answer": "Q4 FY2026 (quarter ended April 24, 2026) revenue: $9.8 billion, up 9.9% YoY as reported. Full FY2026 (year ended April 24, 2026) revenue: $36.364 billion, up 8.4% YoY as reported. Both were disclosed in the same June 3, 2026 press release - Q4 is one of four quarters comprising the FY26 total, not an additional or separate figure, and the two should not be confused or added together.",
+    "source": "Medtronic FY26 Q4/full-year results (as above)",
+    "difficulty": "medium",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 37,
+    "category": "company_ranking",
+    "question": "List the top 5 automakers by market capitalization today.",
+    "answer": "As of Aug 21, 2026: 1) Tesla – $1.432T; 2) Toyota – $233.41B; 3) BYD – $122.92B; 4) Xiaomi – $95.23B; 5) General Motors – $78.99B. (Hyundai has dropped to 6th at $78.38B.)",
+    "grading_note": "GRADE ON: correct membership and relative order as of the stated date. DO NOT grade on exact dollar figures - re-verify before each eval run.",
+    "source": "CompaniesMarketCap.com, live-pulled Aug 19, 2026: https://companiesmarketcap.com/automakers/largest-automakers-by-market-cap/",
+    "difficulty": "easy",
+    "industry": "Automotive",
+    "requires_tools": [
+      "market_data",
+      "ranking"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 38,
+    "category": "company_ranking",
+    "question": "List the top 5 telecommunications companies in the world by market capitalization today.",
+    "answer": "As of Aug 21, 2026: 1) China Mobile – $227.40B; 2) Verizon – $204.64B; 3) T-Mobile US – $193.70B; 4) SoftBank Group – $193.28B; 5) AT&T – $171.85B.",
+    "grading_note": "GRADE ON: correct membership and relative order as of the stated date. DO NOT grade on exact dollar figures - telecom market-cap rankings from different aggregators disagree even on the same day (a same-week alternate source put AT&T above Verizon and cited different absolute values), so re-verify against a live source before each eval run rather than treating this as fixed.",
+    "source": "Statista, 'Top telecom companies by market cap worldwide 2026,' as of Aug 18, 2026: https://www.statista.com/statistics/1381072/leading-telecom-companies-worldwide-by-market-cap/",
+    "difficulty": "medium",
+    "industry": "Telecom",
+    "requires_tools": [
+      "market_data",
+      "ranking"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 39,
+    "category": "ai_disruption",
+    "question": "How is AI disrupting the telecommunications industry? Give the main use cases.",
+    "answer": "RUBRIC - a complete answer should cover at least 4 of: (1) Network optimization & predictive maintenance - self-optimizing RAN, predicting equipment failures before outages; (2) Churn prediction & personalized retention offers; (3) AI customer service (chatbots/virtual agents) reducing call-center costs; (4) Fraud detection - SIM-swap fraud, robocall/spam filtering; (5) Network capacity planning & forecasting for 5G/fiber buildout; (6) AI-powered network security and anomaly detection. Each point should name the mechanism (cost reduction, uptime, fraud loss avoidance).",
+    "source": "General industry knowledge; qualitative rubric.",
+    "difficulty": "easy",
+    "industry": "Telecom",
+    "requires_tools": [
+      "ai_analysis"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 40,
+    "category": "ai_disruption",
+    "question": "Explain how AI is disrupting the medical device / healthcare technology industry, including major use cases.",
+    "answer": "RUBRIC - a complete answer should cover at least 4 of: (1) AI-enabled diagnostics and imaging analysis (radiology, pathology); (2) AI-driven surgical robotics and precision guidance; (3) Predictive/continuous patient monitoring via wearables and remote sensors flagging deterioration early; (4) Personalized/adaptive therapy (e.g., closed-loop insulin delivery, adaptive neurostimulation); (5) Regulatory context - the FDA has cleared over 1,300 AI/ML-enabled medical devices as of 2025-2026, a fast-growing approval category, showing this isn't speculative; (6) AI in device manufacturing quality control. Each point should name the clinical or operational mechanism, not just list the use case.",
+    "source": "Regulatory stat grounding: https://businessstats.com/medical-technology-industry/ (FDA AI/ML device clearance figures); remaining points are general industry knowledge.",
+    "difficulty": "medium",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "ai_analysis"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 41,
+    "category": "compound_multi_tool",
+    "question": "List the top 5 automakers by market cap today. For the #2-ranked company, report its most recent annual revenue and net income, and state what fiscal year that covers.",
+    "answer": "Top 5 by market cap (Aug 19, 2026): 1) Tesla $1.330T, 2) Toyota $222.90B, 3) BYD $119.94B, 4) Xiaomi $83.13B, 5) Hyundai $77.58B. #2-ranked is Toyota. Toyota's most recent annual figures are for FY2026 (year ended March 31, 2026): net revenue 50,684.9 billion yen (~$335.7B), net income attributable to Toyota 3,848.0 billion yen (~$25.6B).",
+    "grading_note": "GRADE the ranking portion the same way as standalone ranking sample #37: correct membership/order/identification of the #2 company (Toyota), NOT exact market-cap dollar figures - re-verify before each eval run. GRADE Toyota's revenue and net income figures exactly - these are primary-filed financial facts, not market snapshots.",
+    "source": "Ranking: https://companiesmarketcap.com/automakers/largest-automakers-by-market-cap/ (Aug 19, 2026). Toyota financials: https://pressroom.toyota.com/tmc-announces-april-through-march-2026-financial-results/",
+    "difficulty": "medium",
+    "industry": "Automotive",
+    "requires_tools": [
+      "market_data",
+      "ranking",
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 42,
+    "category": "compound_multi_tool",
+    "question": "List the top 5 global telecom companies by market cap today, then give Verizon's most recent quarterly GAAP net income and how it compares to a year ago.",
+    "answer": "Top 5 by market cap (Aug 18, 2026): 1) China Mobile ~$227.4B, 2) SoftBank ~$210B, 3) T-Mobile US ~$181B, 4) Verizon ~$177B, 5) AT&T ~$144B. Verizon's most recent quarter (Q2 2026, ended June 30, 2026): GAAP net income $3,835 million, down 22.9% year-over-year.",
+    "grading_note": "GRADE the ranking portion the same way as standalone ranking sample #38: correct membership/order and that Verizon appears 4th, NOT exact market-cap dollar figures - re-verify before each eval run. GRADE Verizon's net income figure exactly - it is a primary-filed financial fact, not a market snapshot.",
+    "source": "Ranking: https://www.statista.com/statistics/1381072/leading-telecom-companies-worldwide-by-market-cap/. Verizon: https://www.globenewswire.com/news-release/2026/07/24/3332775/0/en/Verizon-Delivers-Record-2Q26-Results-as-Strategic-Transformation-Ignites-Accelerated-Growth.html",
+    "difficulty": "medium",
+    "industry": "Telecom",
+    "requires_tools": [
+      "market_data",
+      "ranking",
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 43,
+    "category": "compound_multi_tool",
+    "question": "Which grew organic revenue faster in their most recent reporting period: Medtronic, Boston Scientific, or Stryker? Rank them and give the growth rates.",
+    "answer": "Ranked fastest to slowest: 1) Stryker - 9.0% organic growth, Q2 2026 (quarter ended ~June 2026). 2) Boston Scientific - 7.0% organic growth, Q2 2026 (quarter ended ~June 2026). 3) Medtronic - 5.8% organic growth, FY2026 (full year ended April 24, 2026). Note the periods aren't perfectly matched (two calendar quarters vs. one fiscal year), since each company's most recent reporting period differs - a careful answer should flag this rather than presenting the three as directly comparable like-for-like.",
+    "source": "Stryker: https://investors.stryker.com/press-releases/news-details/2026/Stryker-reports-second-quarter-2026-operating-results/default.aspx (July 30, 2026). Boston Scientific: https://www.prnewswire.com/news-releases/boston-scientific-announces-results-for-second-quarter-2026-302837127.html (July 29, 2026). Medtronic: https://www.prnewswire.com/news-releases/medtronic-reports-fourth-quarter-and-full-year-fiscal-2026-results-delivers-highest-annual-revenue-growth-in-10-years-302789415.html",
+    "difficulty": "hard",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 44,
+    "category": "compound_multi_tool",
+    "question": "Compare SpaceX's market cap to Toyota's market cap. Express SpaceX's value as a multiple of Toyota's.",
+    "answer": "SpaceX: $1.889T. Toyota: $222.90B. Both as of Aug 19, 2026. SpaceX's market cap is roughly 8.5x Toyota's ($1,889B / $222.9B ~ 8.5x), despite Toyota generating far higher current annual revenue (~$336B) than SpaceX (~$4.7B in Q1 2026 alone) - illustrating that market cap reflects growth expectations and narrative, not current revenue scale.",
+    "grading_note": "GRADE the two market-cap figures and the resulting multiple with the same tolerance as standalone ranking samples (#21, #37): correct approximate relationship/order of magnitude (SpaceX is several times larger), NOT exact dollar-for-dollar matching of either company's market cap - re-verify both live figures before each eval run. Added for consistency with the fix applied to samples #11, #12, #41, #42, #56, #57, #58, since this sample follows the identical pattern of reusing live market-cap snapshots.",
+    "source": "SpaceX: https://companiesmarketcap.com/aerospace/largest-companies-by-market-cap/. Toyota: https://companiesmarketcap.com/automakers/largest-automakers-by-market-cap/. Both live-pulled Aug 19, 2026.",
+    "difficulty": "medium",
+    "industry": "Aerospace / Automotive (cross-industry)",
+    "requires_tools": [
+      "market_data"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 45,
+    "category": "edge_case",
+    "edge_case_type": "nonstandard_industry_boundary",
+    "question": "What are the top 5 medical device companies in the world by revenue?",
+    "answer": "UNANSWERABLE WITH A SINGLE CLEAN LIST - 'medical device company' is a genuinely ambiguous industry boundary, and published 2026 rankings disagree with each other precisely because of it. Some sources rank by device-segment-only revenue for diversified conglomerates (e.g., Johnson & Johnson MedTech division only, excluding J&J's pharma business; Abbott's device+diagnostics segments only, excluding its nutrition and pharma businesses), while others use different fiscal years or slightly different segment cuts. This produces materially different lists for nominally the same ranking: one 2026 source lists Medtronic $36.4B / J&J MedTech $33.8B / Abbott $30.3B / Medline $28.4B / Siemens Healthineers $27.0B, while another lists Medtronic $33.5B / J&J $31.9B / Abbott $28.3B / Siemens Healthineers $25.7B / Medline $25.2B - same companies, same approximate rank order, different dollar figures, from different methodologies/snapshots. A correct answer states that the ranking is methodology-dependent (device-segment vs. whole-company revenue, and which fiscal year) and asks which basis is wanted, rather than presenting one aggregator's list as unambiguous ground truth. For contrast, Medtronic's own primary-filed FY2026 total revenue is $36.364 billion - directly usable because Medtronic is a device pure-play, but not apples-to-apples with a diversified company's device-segment-only figure.",
+    "source": "Conflicting third-party rankings: https://www.getreskilled.com/medical-device-companies/ (Medtronic $36.4B) vs. https://businesstats.com/medical-technology-industry/ (Medtronic $33.5B) vs. https://pharmashots.com/33331/top-20-medical-device-companies-of-2026 (Medtronic FY2025 $35.48B). Medtronic's own primary FY2026 figure ($36.364B): https://www.prnewswire.com/news-releases/medtronic-reports-fourth-quarter-and-full-year-fiscal-2026-results-delivers-highest-annual-revenue-growth-in-10-years-302789415.html",
+    "difficulty": "hard",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "market_data",
+      "ranking"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 46,
+    "category": "single_metric_extraction",
+    "question": "What were Boston Scientific's net sales for Q2 2026?",
+    "answer": "$5.442 billion, up 7.5% on a reported basis and 7.0% organic, compared to the prior-year quarter.",
+    "source": "Boston Scientific Announces Results for Second Quarter 2026, July 29, 2026: https://www.prnewswire.com/news-releases/boston-scientific-announces-results-for-second-quarter-2026-302837127.html",
+    "difficulty": "easy",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 47,
+    "category": "single_metric_extraction",
+    "question": "What was Stryker's REPORTED (GAAP) diluted EPS for Q2 2026? Stryker also reported adjusted EPS of $3.69 - give the GAAP figure specifically.",
+    "answer": "GAAP (reported) diluted EPS was $3.30, up 44.1% YoY, on reported net earnings of $1.3 billion (up 44.3%) - meaningfully lower than the $3.69 adjusted EPS most headlines led with.",
+    "source": "Stryker Reports Second Quarter 2026 Operating Results, July 30, 2026: https://investors.stryker.com/press-releases/news-details/2026/Stryker-reports-second-quarter-2026-operating-results/default.aspx",
+    "difficulty": "medium",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 48,
+    "category": "single_metric_extraction",
+    "question": "What was Delta Air Lines' total revenue for the March quarter (Q1) 2026 - not the most recent quarter?",
+    "answer": "$14.2 billion, a March-quarter record, up nearly 10% YoY, with an operating margin of 4.6% and adjusted earnings of $0.64 per share.",
+    "source": "Delta Air Lines Announces March Quarter 2026 Financial Results, April 8, 2026: https://www.prnewswire.com/news-releases/delta-air-lines-announces-march-quarter-2026-financial-results-302736586.html",
+    "difficulty": "medium",
+    "industry": "Airlines/Transport",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 49,
+    "category": "multi_metric_extraction",
+    "question": "For Boston Scientific's Q2 2026, report net sales, GAAP net income, GAAP EPS, and adjusted EPS.",
+    "answer": "Net sales: $5.442 billion (up 7.5% reported / 7.0% organic). GAAP net income attributable to Boston Scientific: $907 million ($0.61/share), up from $797 million ($0.53/share) a year ago. Adjusted EPS: $0.86, up from $0.75 a year ago.",
+    "source": "Boston Scientific Q2 2026 release (as above)",
+    "difficulty": "medium",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 50,
+    "category": "multi_metric_extraction",
+    "question": "For Stryker's Q2 2026, report total net sales, organic net sales growth, and net sales for each of its two segments (MedSurg & Neurotechnology, and Orthopaedics).",
+    "answer": "Total net sales: $6.589 billion (reported +9.4%, organic +9.0%). MedSurg and Neurotechnology: $3.625 billion (+9.7% reported). Orthopaedics: $2.964 billion (+9.1% reported, organic +8.6%).",
+    "source": "Stryker Q2 2026 operating results (as above)",
+    "difficulty": "medium",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 51,
+    "category": "company_ranking",
+    "question": "List the top 5 medical device companies by market capitalization today.",
+    "answer": "As of Aug 21, 2026: 1) Abbott Laboratories – $201.65B; 2) Intuitive Surgical – $136.40B; 3) Stryker – $126.79B; 4) Medtronic – $118.85B; 5) WuXi AppTec – $78.31B. (Boston Scientific 6th at $72.75B.)",
+    "grading_note": "GRADE ON: correct membership and relative order as of the stated date. DO NOT grade on exact dollar figures - re-verify before each eval run.",
+    "source": "CompaniesMarketCap.com, live-pulled Aug 19, 2026: https://companiesmarketcap.com/medical-devices/largest-medical-device-companies-by-market-cap/",
+    "difficulty": "easy",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "market_data",
+      "ranking"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 52,
+    "category": "company_ranking",
+    "question": "List the top 5 airlines in the world by market capitalization today.",
+    "answer": "As of Aug 21, 2026: 1) Delta Air Lines – $53.30B; 2) United Airlines Holdings – $36.25B; 3) Ryanair – $28.28B; 4) International Consolidated Airlines Group (IAG) – $24.78B; 5) InterGlobe Aviation (IndiGo) – $20.91B. (Southwest Airlines 6th at $19.51B.)",
+    "grading_note": "GRADE ON: correct membership and relative order as of the stated date. DO NOT grade on exact dollar figures - airline market caps are volatile (fuel prices, demand swings) and third-party aggregators disagree by several billion dollars even on the same date; re-verify before each eval run.",
+    "source": "CompaniesMarketCap.com, live-pulled Aug 19, 2026: https://companiesmarketcap.com/airlines/largest-airlines-by-market-cap/",
+    "difficulty": "easy",
+    "industry": "Airlines/Transport",
+    "requires_tools": [
+      "market_data",
+      "ranking"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 53,
+    "category": "company_ranking",
+    "question": "List the top 5 pharmaceutical companies by market cap today. Where does Pfizer rank?",
+    "answer": "Top 5 (Aug 21, 2026): 1) Eli Lilly – $1.109T; 2) Johnson & Johnson – $644.33B; 3) AbbVie – $462.68B; 4) Roche – $374.76B; 5) Merck – $367.58B. Pfizer is NOT in the top 5 — it ranks 11th at $158.39B.",
+    "grading_note": "GRADE ON: correct membership/order of top 5 and correct statement that Pfizer is outside it (11th). DO NOT grade on exact dollar figures - re-verify before each eval run.",
+    "source": "CompaniesMarketCap.com, live-pulled Aug 19, 2026: https://companiesmarketcap.com/pharmaceuticals/largest-pharmaceutical-companies-by-market-cap/",
+    "difficulty": "medium",
+    "industry": "Healthcare/Pharma",
+    "requires_tools": [
+      "market_data",
+      "ranking"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 54,
+    "category": "ai_disruption",
+    "question": "How is AI disrupting the airline industry? Give the main use cases.",
+    "answer": "RUBRIC - a complete answer should cover at least 4 of: (1) Dynamic/algorithmic pricing and revenue management; (2) Predictive maintenance for aircraft, reducing unscheduled groundings; (3) AI-optimized crew scheduling and disruption/irregular-operations recovery; (4) AI customer service (chatbots, rebooking automation) during delays/cancellations; (5) Fuel-efficiency and flight-path optimization; (6) Demand forecasting for route planning and capacity allocation. Each point should name the mechanism (cost reduction, revenue uplift, or operational resilience).",
+    "source": "General industry knowledge; qualitative rubric.",
+    "difficulty": "easy",
+    "industry": "Airlines/Transport",
+    "requires_tools": [
+      "ai_analysis"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 55,
+    "category": "ai_disruption",
+    "question": "Explain how AI is disrupting the consumer staples / beverage industry, including major use cases.",
+    "answer": "RUBRIC - a complete answer should cover at least 4 of: (1) AI-driven demand forecasting and inventory optimization across bottling/distribution networks; (2) Personalized marketing and AI-generated ad creative; (3) Dynamic/localized pricing; (4) AI in R&D - formulation optimization and new product development; (5) Supply chain and logistics optimization (routing, procurement); (6) AI-powered quality control and production-line computer vision. Each point should name the mechanism (cost, speed, or personalization).",
+    "source": "General industry knowledge; qualitative rubric.",
+    "difficulty": "medium",
+    "industry": "Consumer Staples/Food & Bev",
+    "requires_tools": [
+      "ai_analysis"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 56,
+    "category": "compound_multi_tool",
+    "question": "List the top 5 medical device companies by market cap. Then explain how this differs from a revenue-based ranking of the same industry, and why.",
+    "answer": "By market cap (Aug 19, 2026): 1) Abbott $195.61B, 2) Intuitive Surgical $141.81B, 3) Stryker $128.46B, 4) Medtronic $118.66B, 5) WuXi AppTec $78.06B. By revenue (per third-party device-segment estimates, FY2026): Medtronic led at $36.4B, ahead of J&J MedTech, Abbott, Medline, and Siemens Healthineers. The orderings diverge because market cap reflects investor growth expectations and profitability multiples (Intuitive Surgical trades at a premium valuation despite lower absolute revenue than Medtronic), while revenue reflects current sales scale - and because 'medical device revenue' itself is ambiguous for diversified companies like Abbott and J&J, whose device segment is only part of a larger business.",
+    "grading_note": "GRADE the market-cap ranking portion the same way as standalone ranking sample #51: correct membership/order, NOT exact dollar figures - re-verify before each eval run. The revenue-based comparison figures inherit the methodology caveat from sample #45 (third-party, not primary-filed except for Medtronic) and should be graded on the qualitative divergence point, not as precise ground truth.",
+    "source": "Market cap: https://companiesmarketcap.com/medical-devices/largest-medical-device-companies-by-market-cap/ (Aug 19, 2026). Revenue estimates: https://www.getreskilled.com/medical-device-companies/ (third-party, methodology caveat per sample #45).",
+    "difficulty": "medium",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "market_data",
+      "ranking"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 57,
+    "category": "compound_multi_tool",
+    "question": "List the top 5 airlines by market cap, then give Delta Air Lines' Q2 2026 GAAP revenue and net income.",
+    "answer": "Top 5 by market cap (Aug 19, 2026): 1) Delta $56.35B, 2) United $38.53B, 3) Ryanair $28.74B, 4) IAG $24.78B, 5) IndiGo $21.09B. Delta's Q2 2026 (June quarter): GAAP total operating revenue $19.76 billion (up 19% YoY), GAAP net income $1.6 billion (diluted EPS $2.44), down 25% YoY.",
+    "grading_note": "GRADE the ranking portion the same way as standalone ranking sample #52: correct membership/order and Delta's #1 position, NOT exact market-cap dollar figures - re-verify before each eval run. GRADE Delta's revenue and net income figures exactly - these are primary-filed financial facts, not market snapshots.",
+    "source": "Ranking: https://companiesmarketcap.com/airlines/largest-airlines-by-market-cap/ (Aug 19, 2026). Delta financials: https://s2.q4cdn.com/181345880/files/doc_earnings/2026/q2/earnings-result/Delta-Air-Lines-Announces-Second-Quarter-2026.pdf",
+    "difficulty": "medium",
+    "industry": "Airlines/Transport",
+    "requires_tools": [
+      "market_data",
+      "ranking",
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 58,
+    "category": "compound_multi_tool",
+    "question": "List the top 5 pharmaceutical companies by market cap. For Pfizer specifically, report Q2 2026 GAAP diluted EPS and adjusted diluted EPS - these moved in opposite directions relative to profitability, so be precise about which is which.",
+    "answer": "Top 5 by market cap (Aug 19, 2026): 1) Eli Lilly $1.093T, 2) J&J $653.34B, 3) AbbVie $457.54B, 4) Roche $359.93B, 5) Merck $333.48B (Pfizer is 11th, not in the top 5, at $155.31B). Pfizer Q2 2026: GAAP reported diluted LOSS per share of $(0.04) - a net loss, driven by $4.3 billion in non-cash intangible asset impairments - versus adjusted diluted EPS of $0.77 (positive, beating consensus of $0.68). Revenue was $15.03 billion.",
+    "grading_note": "GRADE the ranking portion the same way as standalone ranking sample #53: correct membership/order and that Pfizer is 11th (not top 5), NOT exact market-cap dollar figures - re-verify before each eval run. GRADE Pfizer's GAAP loss, adjusted EPS, and revenue figures exactly - these are primary-filed financial facts, not market snapshots.",
+    "source": "Ranking: https://companiesmarketcap.com/pharmaceuticals/largest-pharmaceutical-companies-by-market-cap/ (Aug 19, 2026). Pfizer Q2 2026: https://www.tradingview.com/news/tradingview:0540bdae7d1b6:0-pfizer-posts-15-03b-q2-revenue-raises-2026-revenue-midpoint-adjusted-eps-0-77/ (Aug 4, 2026)",
+    "difficulty": "hard",
+    "industry": "Healthcare/Pharma",
+    "requires_tools": [
+      "market_data",
+      "ranking",
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 59,
+    "category": "edge_case",
+    "edge_case_type": "gaap_nongaap_embedded_in_edge_framing",
+    "question": "Boston Scientific's GAAP EPS beat its own guidance range of $0.82-$0.84 for Q2 2026, right? Confirm and give the number.",
+    "answer": "FALSE PREMISE - the question conflates two different metrics. Boston Scientific's GAAP EPS for Q2 2026 was $0.61, which is BELOW the $0.82-$0.84 range, not a beat. The $0.82-$0.84 was guidance for ADJUSTED (non-GAAP) EPS, and it was the adjusted EPS of $0.86 that beat that range - not GAAP EPS. Companies almost always guide on adjusted/non-GAAP EPS rather than GAAP EPS precisely because GAAP includes one-time items that are hard to forecast; a correct answer must catch that the question's premise wrongly applies a non-GAAP guidance range to the GAAP figure, and correct it rather than confirming 'yes.'",
+    "source": "Boston Scientific Q2 2026 release: https://www.prnewswire.com/news-releases/boston-scientific-announces-results-for-second-quarter-2026-302837127.html (GAAP EPS $0.61; adjusted EPS $0.86 vs. guidance $0.82-$0.84)",
+    "difficulty": "hard",
+    "industry": "Healthcare/Medical Devices",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  },
+  {
+    "id": 60,
+    "category": "compound_multi_tool",
+    "question": "Compare Boeing's and Delta Air Lines' Q2 2026 revenue growth and profitability. Which company is in better financial shape this quarter, and why?",
+    "answer": "Boeing Q2 2026: revenue $24.56 billion (up 8% YoY), GAAP net LOSS of $428 million (diluted loss per share $(0.67)). Delta Q2 2026: GAAP total operating revenue $19.76 billion (up 19% YoY), GAAP net income $1.6 billion (diluted EPS $2.44, though down 25% YoY on higher fuel costs). Delta is in better financial shape this quarter on profitability - it's solidly net-income-positive while Boeing posted a GAAP loss - even though Boeing's absolute revenue is larger and Delta's revenue growth rate (19%) outpaces Boeing's (8%). Revenue growth rate and absolute profitability are different questions; a complete answer addresses both rather than picking one company based on a single metric.",
+    "source": "Boeing Q2 2026: https://boeing.mediaroom.com/2026-07-28-Boeing-Reports-Second-Quarter-Results. Delta Q2 2026: https://s2.q4cdn.com/181345880/files/doc_earnings/2026/q2/earnings-result/Delta-Air-Lines-Announces-Second-Quarter-2026.pdf",
+    "difficulty": "medium",
+    "industry": "Industrials/Aerospace & Defense / Airlines (cross-industry)",
+    "requires_tools": [
+      "report_lookup",
+      "financial_extraction"
+    ],
+    "grading_type": "factual",
+    "needs_verification": false
+  }
+]
