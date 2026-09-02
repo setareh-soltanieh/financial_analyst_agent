@@ -49,3 +49,40 @@ async def run_query(agent: Any, query: str) -> str:
     if final is None:
         return "The agent returned no result."
     return str(final["messages"][-1].content)
+
+
+def _describe_message(message: Any) -> dict[str, Any] | None:
+    """Turn a new graph message into a UI-facing event, or None if it's not notable."""
+    tool_calls = getattr(message, "tool_calls", None)
+    if tool_calls:
+        return {"type": "tool_calls", "calls": [{"name": tc["name"], "args": tc["args"]} for tc in tool_calls]}
+    if type(message).__name__ == "ToolMessage":
+        return {"type": "tool_result", "name": message.name, "content": str(message.content)}
+    return None
+
+
+async def stream_query(agent: Any, query: str):
+    """Like run_query, but yields tool-call/tool-result events as they happen, ending with a final event."""
+    deadline = time.monotonic() + RUN_LIMITS["timeout_seconds"]
+    config = {"recursion_limit": RUN_LIMITS["recursion_limit"]}
+    seen = 0
+    final = None
+
+    async for chunk in agent.astream(
+        {"messages": [("user", query)]}, config=config, stream_mode="values"
+    ):
+        final = chunk
+        messages = chunk["messages"]
+        for message in messages[seen:]:
+            event = _describe_message(message)
+            if event:
+                yield event
+        seen = len(messages)
+        if time.monotonic() > deadline:
+            yield {"type": "final", "content": "Execution budget exceeded; no verified final answer. Try a narrower query."}
+            return
+
+    if final is None:
+        yield {"type": "final", "content": "The agent returned no result."}
+        return
+    yield {"type": "final", "content": str(final["messages"][-1].content)}

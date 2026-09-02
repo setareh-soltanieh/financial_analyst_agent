@@ -68,7 +68,8 @@ ALLOWED_TOOLS = [
     "tavily_crawl",
     "tavily_research",
 
-    "pdf",
+    "read_pdf",
+    "search_pdf",
 ]
 
 RUN_LIMITS = {"recursion_limit": 30, "timeout_seconds": 180}
